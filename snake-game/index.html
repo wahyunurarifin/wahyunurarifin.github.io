@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <script type="text/javascript" src="script.js"></script>
+        <link rel="stylesheet" href="snake.css">
+    </head>
+        
+    <body onload="draw();">
+        <h1 style="text-align: center;">Snake Game</h1>
+        
+        <!-- menambahkan Main Board -->
+        <div id="mainBoard">
+            <p id="p1">Score</p>
+            <canvas id="score1Board" width="50" height="50" style="border: 1px solid black;"></canvas>
+
+            <p id="p2">Speed</p>
+            <canvas id="speedBoard" width="50" height="50" style="border: 1px solid black;"></canvas>
+
+            <br>
+            <!-- Menambahkan file apple -->
+            <img id="apple" style="display: none;" width="20" height="20" src="assets/apple.png" alt="Apple">
+            <!-- Menambahkan file head -->
+            <img id="head" style="display: none;" width="20" height="20" src="assets/head.png" alt="Head">
+            <!-- Menambahkan file body -->
+            <img id="body" style="display: none;" width="20" height="20" src="assets/body.png" alt="Body">
+            <!-- Menambahkan file heart -->
+            <img id="heart" style="display: none;" width="20" height="20" src="assets/love.png" alt="Heart">
+        
+            <!-- Board -->
+            <canvas id="snakeBoard" width="400" height="400" style="border:1px solid #000000;" ></canvas>   
+
+        </div>
+    </body>
+</html>
