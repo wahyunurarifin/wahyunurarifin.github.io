@@ -1,17 +1,19 @@
 #mainBoard{
-      width: 500px;
-      height: 600px;
+      width: 600px;
+      height: 720px;
       margin: auto;
       padding: 0px;
       display: flex;
       flex-direction: column;
       align-items: center;
       border-style: solid;
+      background-color:bisque;
 }
 #p1{
       margin: 0px;
+      margin-top: 5px;
 }
-#p2{
-      margin: 0px;
-      margin-top: 2px;
+
+#snakeBoard{
+      background-color: aliceblue;
 }
