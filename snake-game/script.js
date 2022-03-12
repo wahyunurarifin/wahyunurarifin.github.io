@@ -1,5 +1,5 @@
 const CELL_SIZE = 20;
-const CANVAS_SIZE = 400;
+const CANVAS_SIZE = 520;
 let redraw_interval = 50;
 const WIDTH = CANVAS_SIZE / CELL_SIZE;
 const HEIGHT = CANVAS_SIZE / CELL_SIZE;
@@ -42,21 +42,21 @@ function initSnake(color) {
         score: 0,
     }
 }
-let snake1 = initSnake("purple");
+let snake1 = initSnake();
 
 // make apples array
 let apples = [{
-    color: "red",
+    // color: "red",
     position: initPosition(),
 },
 {
-    color: "green",
+    // color: "green",
     position: initPosition(),
 }]
 
 //make heart array
 let hearts = [{
-    color: "pink",
+    // color: "pink",
     position: initPosition(),
 }]
 
@@ -75,7 +75,7 @@ function drawScore(snake) {
 
     scoreCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     scoreCtx.font = "30px Arial";
-    scoreCtx.fillStyle = snake.color
+    scoreCtx.fillStyle = "#000000";
     scoreCtx.fillText(snake.score, 10, scoreCanvas.scrollHeight / 2);
 }
 
@@ -83,67 +83,75 @@ function drawScore(snake) {
 //     return MOVE_INTERVAL-20;
 // }
 
-// membuat function level game
+// membuat function rintangan level game
 function level1(){
     let snakeCanvas = document.getElementById("snakeBoard");
     let ctx = snakeCanvas.getContext("2d");
     ctx.fillStyle = "#000000";
-    var lvl1 = ctx.fillRect(200, 100, 20, 200);
+    ctx.fillRect(260, 100, 20, 250);
 }
 function level2(){
     let snakeCanvas = document.getElementById("snakeBoard");
     let ctx = snakeCanvas.getContext("2d");
     ctx.fillStyle = "#000000";
-    var lvl2 = ctx.fillRect(80, 200, 260, 20);
+    ctx.fillRect(120, 260, 260, 20);
 }
 function level3(){
     let snakeCanvas = document.getElementById("snakeBoard");
     let ctx = snakeCanvas.getContext("2d");
     ctx.fillStyle = "#000000";
-    var lvl3 = ctx.fillRect(80, 140, 260, 20);
-    var lvl3 = ctx.fillRect(80, 260, 260, 20);
+    ctx.fillRect(140, 200, 260, 20);
+    ctx.fillRect(140, 320, 260, 20);
 }
 function level4(){
     let snakeCanvas = document.getElementById("snakeBoard");
     let ctx = snakeCanvas.getContext("2d");
     ctx.fillStyle = "#000000";
-    var lvl4 = ctx.fillRect(140, 80, 20, 100);
-    var lvl4 = ctx.fillRect(140, 200, 20, 140);
+    ctx.fillRect(200, 80, 20, 120);
+    ctx.fillRect(200, 240, 20, 160);
 
-    var lvl4 = ctx.fillRect(260, 80, 20, 140);
-    var lvl4 = ctx.fillRect(260, 240, 20, 100);
+    ctx.fillRect(320, 80, 20, 160);
+    ctx.fillRect(320, 280, 20, 120);
 }
 function level5(){
     let snakeCanvas = document.getElementById("snakeBoard");
     let ctx = snakeCanvas.getContext("2d");
     ctx.fillStyle = "#000000";
-    var lvl5 = ctx.fillRect(140, 80, 20, 100);
-    var lvl5 = ctx.fillRect(140, 200, 20, 140);
+    ctx.fillRect(200, 80, 20, 120);
+    ctx.fillRect(200, 240, 20, 160);
+
+    ctx.fillRect(320, 80, 20, 160);
+    ctx.fillRect(320, 280, 20, 100);
     
-    var lvl5 = ctx.fillRect(260, 80, 20, 140);
-    var lvl5 = ctx.fillRect(260, 240, 20, 100);
-    
-    var lvl5 = ctx.fillRect(80, 200, 260, 20);
+    ctx.fillRect(140, 240, 260, 20);
 }
 function speedUp(speed){
     move_interval = speed
 }
 
+function lvlup(){
+    var audio = new Audio('assets/level-up.mp3');
+    audio.play();
+    alert("Level UP !");
+}
+
 function watchSnake(snake1){
     // menambahkan kecepatan snake tiap level
     if (snake1.body.length >= 6 && snake1.body.length <= 10){
-        speedUp(150) 
+        speedUp(150)
+    
     } else if (snake1.body.length >= 11 && snake1.body.length <= 15){
         speedUp(120)
-
+             
     } else if (snake1.body.length >= 16 && snake1.body.length <= 20){
         speedUp(100)
-
+         
     } else if (snake1.body.length >= 21 && snake1.body.length <= 25){
         speedUp(80)
-
+         
     } else if (snake1.body.length >= 26){
         speedUp(60)
+         
     }
 }
 
@@ -155,11 +163,14 @@ function draw() {
 
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
         
-        drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
+        // drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
+        
+        let snakeHead = document.getElementById("head");
+        let snakeBody = document.getElementById("body");
+        ctx.drawImage(snakeHead, snake1.head.x * CELL_SIZE, snake1.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+
         for (let i = 1; i < snake1.body.length; i++) {
-            // var img = document.getElementById("head");
-            // ctx.drawImage(img, snake.position.x * CELL_SIZE, snake.position.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-            drawCell(ctx, snake1.body[i].x, snake1.body[i].y, snake1.color);
+            ctx.drawImage(snakeBody, snake1.body[i].x * CELL_SIZE, snake1.body[i].y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
             
         }
 
@@ -201,6 +212,17 @@ function draw() {
             level5();
         }    
         drawScore(snake1);
+
+        console.log(move_interval);
+        document.getElementById("speed").innerHTML = move_interval;
+        // document.getElementById("speedBoard") = move_interval;
+        // let speedCtx = speedCanvas.getContext("2d");
+
+        // speedCtx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+        // speedCtx.font = "30px Arial";
+        // speedCtx.fillStyle = "#000000";
+        // speedCtx.fillText(snake.speed, 10, speedCanvas.scrollHeight / 2);
+        
 
     }, redraw_interval);
 }
@@ -284,7 +306,7 @@ function checkCollision(snakes) {
         audio.play();
 
         alert("Game over");
-        snake1 = initSnake("purple");
+        snake1 = initSnake();
     }
     return isCollide;
 }
