@@ -12,7 +12,7 @@ const DIRECTION = {
 
 let move_interval = 200;
 //set default hp
-let totalHeart = 3;
+let hp = 3;
 let speedlUp = 0;
 function initPosition() {
     return {
@@ -125,15 +125,6 @@ function level5(){
     
     ctx.fillRect(140, 240, 260, 20);
 }
-function speedUp(speed){
-    move_interval = speed
-}
-
-function lvlup(){
-    var audio = new Audio('assets/level-up.mp3');
-    audio.play();
-    alert("Level UP !");
-}
 
 function watchSnake(snake1){
     // menambahkan kecepatan snake tiap level
@@ -164,7 +155,7 @@ function draw() {
         ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
         
         // drawCell(ctx, snake1.head.x, snake1.head.y, snake1.color);
-        
+        // mengubah image pada snake
         let snakeHead = document.getElementById("head");
         let snakeBody = document.getElementById("body");
         ctx.drawImage(snakeHead, snake1.head.x * CELL_SIZE, snake1.head.y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -213,8 +204,9 @@ function draw() {
         }    
         drawScore(snake1);
 
-        console.log(move_interval);
+        // mendapatkan speed, hp ular
         document.getElementById("speed").innerHTML = move_interval;
+        document.getElementById("hp").innerHTML = hp;
         // document.getElementById("speedBoard") = move_interval;
         // let speedCtx = speedCanvas.getContext("2d");
 
@@ -257,9 +249,7 @@ function eat(snake, apples, hearts) {
         let heart = hearts[i];
         if (snake.head.x == heart.position.x && snake.head.y == heart.position.y) {
             heart.position = initPosition();
-            snake.score++;
-            heart.score++;
-            snake.body.push({x: snake.head.x, y: snake.head.y});
+            hp++;
         }
     }
 }

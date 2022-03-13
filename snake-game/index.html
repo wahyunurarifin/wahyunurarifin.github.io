@@ -12,9 +12,9 @@
             <p id="p1">Score</p>
             <canvas id="score1Board" width="50" height="50" style="border: none;"></canvas>
 
+            <!-- menambah span speed agar bisa ditangkap -->
             <p>Snake Speed : <span id="speed"></span></p>
 
-            <br>
             <!-- Menambahkan file apple -->
             <img id="apple" style="display: none;" width="20" height="20" src="assets/apple.png" alt="Apple">
             <!-- Menambahkan file head -->
@@ -25,7 +25,10 @@
             <img id="heart" style="display: none;" width="20" height="20" src="assets/love.png" alt="Heart">
         
             <!-- Board -->
-            <canvas id="snakeBoard" width="520" height="520" style="border:1px solid #000000;" ></canvas>   
+            <canvas id="snakeBoard" width="520" height="520" style="border:1px solid #000000;" ></canvas>
+            
+            <!-- menambah span hp agar bisa ditangkap -->
+            <h2>Hp <span id="hp"></span> <img src="./assets/love.png" style="height: 20px; margin-left: 5;" alt=""></h2>
 
         </div>
     </body>
