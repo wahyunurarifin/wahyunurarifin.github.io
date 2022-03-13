@@ -11,6 +11,7 @@ const DIRECTION = {
 }
 
 let move_interval = 200;
+let level = 1;
 //set default hp
 let hp = 3;
 let speedlUp = 0;
@@ -125,6 +126,10 @@ function level5(){
     
     ctx.fillRect(140, 240, 260, 20);
 }
+//menambah speed
+function speedUp(speed){
+    move_interval = speed
+}
 
 function watchSnake(snake1){
     // menambahkan kecepatan snake tiap level
@@ -204,9 +209,10 @@ function draw() {
         }    
         drawScore(snake1);
 
-        // mendapatkan speed, hp ular
+        // mendapatkan speed, hp ular, level
         document.getElementById("speed").innerHTML = move_interval;
         document.getElementById("hp").innerHTML = hp;
+        document.getElementById("level").innerHTML = level;
         // document.getElementById("speedBoard") = move_interval;
         // let speedCtx = speedCanvas.getContext("2d");
 
@@ -242,6 +248,13 @@ function eat(snake, apples, hearts) {
         if (snake.head.x == apple.position.x && snake.head.y == apple.position.y) {
             apple.position = initPosition();
             snake.score++;
+            if(snake.score % 5 === 0){
+                level++;
+                var audio = new Audio('assets/level-up.mp3');
+                audio.play();
+
+                alert("Level UP !");
+            }
             snake.body.push({x: snake.head.x, y: snake.head.y});
         }
     }
@@ -297,6 +310,9 @@ function checkCollision(snakes) {
 
         alert("Game over");
         snake1 = initSnake();
+        level = 1;
+        move_interval = 200;
+        hp = 3;
     }
     return isCollide;
 }
